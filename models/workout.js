@@ -5,3 +5,5 @@ const Schema = mongoose.Schema;
 const workoutSchema = new Schema(
     {
     });
+
+module.exports = workout;
