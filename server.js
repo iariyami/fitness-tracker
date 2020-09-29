@@ -1,6 +1,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const path = require("path");
+const mongoose = require("mongoose");
+const morgan = require("morgan");
 
 const app = express();
 
@@ -19,6 +21,8 @@ require("./routes/htmlroutes")(app);
 app.listen(PORT, function () {
     console.log("App listening on PORT: " + PORT);
 });
+
+// Connecting application to MongoDB
 mongoose.connect(
     process.env.MONGODB_URI || 'mongodb://localhost/fitnesstracker',
     {
