@@ -1,9 +1,11 @@
+// Node Modules
 const express = require("express");
 const mongoose = require("mongoose");
 const logger = require("morgan");
 
 const db = require("../models")
 
+// Exports API Routes
 module.exports = (app) => {
 
     app.get("/api/workouts", async (req, res) => {

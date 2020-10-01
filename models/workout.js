@@ -1,3 +1,4 @@
+// Required model library
 const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
@@ -42,6 +43,7 @@ const WorkoutSchema = new Schema(
         ],
     });
 
+// Assigning a variable to this Schema so that it can be called after it is exported
 const Workout = mongoose.model("Workout", WorkoutSchema);
 
 module.exports = Workout;

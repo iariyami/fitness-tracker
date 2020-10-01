@@ -16,9 +16,11 @@
 * This Fitness Tracker was made with MongoDB, express.js, Javascript, HTML, and CSS. The server was made using express.js and utilized the html routes to direct users to the different pages of the application. The data that is inserted into each new workout is stored in a database using MongoDB account. There is a schema developed so that the application can properly display the information that the user inserts into each required field. The HTML and CSS were used for the styling and organization of the page. 
 
 * Screenshot of Homepage after a workout is submitted:
+
 ![](images/workoutHome.png)
 
 * Screenshot of Dashboard:
+
 ![](images/workoutDashboard.png)
 
 # **Links**
