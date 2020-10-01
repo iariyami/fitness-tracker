@@ -4,82 +4,48 @@ const logger = require("morgan");
 
 const db = require("../models")
 
-app.post("/submit", ({ body }, res) => {
-    const book = body;
+module.exports = (app) => {
 
-    book.read = false;
-
-    db.books.save(book, (error, saved) => {
-        if (error) {
-            console.log(error);
-        } else {
-            res.send(saved);
+    app.get("/api/workouts", async (req, res) => {
+        try {
+            const allWorkouts = await db.Workout.find({});
+            res.json(allWorkouts);
+        } catch (err) {
+            console.log(err);
+            res.json(err);
         }
     });
-});
 
-app.get("/read", (req, res) => {
-    db.books.find({ read: true }, (error, found) => {
-        if (error) {
-            console.log(error);
-        } else {
-            res.json(found);
+    app.get("/api/workouts/range", async (req, res) => {
+        try {
+            const workoutData = await db.Workout.find({});
+            res.json(workoutData);
+        } catch (err) {
+            console.log(err);
+            res.json(err);
         }
     });
-});
 
-app.get("/unread", (req, res) => {
-    db.books.find({ read: false }, (error, found) => {
-        if (error) {
-            console.log(error);
-        } else {
-            res.json(found);
+    app.post("/api/workouts", async (req, res) => {
+        const now = new Date();
+        try {
+            const newWorkout = await db.Workout.create({ day: now });
+            res.json(newWorkout);
+        } catch (err) {
+            console.log(err);
+            res.json(err);
         }
     });
-});
 
-app.put("/markread/:id", ({ params }, res) => {
-    db.books.update(
-        {
-            _id: mongojs.ObjectId(params.id)
-        },
-        {
-            $set: {
-                read: true
-            }
-        },
-
-        (error, edited) => {
-            if (error) {
-                console.log(error);
-                res.send(error);
-            } else {
-                console.log(edited);
-                res.send(edited);
-            }
+    app.put("/api/workouts/:id", async (req, res) => {
+        try {
+            const currentWorkout = await db.Workout.findById(req.params.id);
+            currentWorkout.exercises.push(req.body);
+            await currentWorkout.save();
+            res.json(currentWorkout);
+        } catch (err) {
+            console.log(err);
+            res.json(err);
         }
-    );
-});
-
-app.put("/markunread/:id", ({ params }, res) => {
-    db.books.update(
-        {
-            _id: mongojs.ObjectId(params.id)
-        },
-        {
-            $set: {
-                read: false
-            }
-        },
-
-        (error, edited) => {
-            if (error) {
-                console.log(error);
-                res.send(error);
-            } else {
-                console.log(edited);
-                res.send(edited);
-            }
-        }
-    );
-});
+    });
+};
