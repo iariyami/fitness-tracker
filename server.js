@@ -14,8 +14,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
 
-require("./routes/apiroutes")(app);
-require("./routes/htmlroutes")(app);
+// require("./routes/api-routes")(app);
+require("./routes/html-routes")(app);
 
 // Listener
 app.listen(PORT, function () {
